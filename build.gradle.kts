@@ -8,6 +8,7 @@ plugins {
 group = "com.vmware.tap.accelerators"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
 
 springBoot {
 	buildInfo()
@@ -28,6 +29,9 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    doLast {
+        println("bob - using System.getenv: " + System.getenv("BOBS_PARAM"))
+    }
 }
 
 tasks.named<Jar>("jar") {
