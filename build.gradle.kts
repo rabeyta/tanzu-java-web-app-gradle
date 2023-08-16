@@ -30,11 +30,23 @@ dependencies {
 tasks.withType<Test> {
     useJUnitPlatform()
     doLast {
-        println("bob - using System.getenv: " + System.getenv("BOBS_PARAM"))
-        println("bob - using project.property: " + project.property("BOBS_PARAM"))
+        println("bob - using project.property from mounted gradle.properties: " + project.property("BOBS_PARAM"))
     }
 }
 
 tasks.named<Jar>("jar") {
     enabled = false
 }
+
+tasks.register("printBuildParams") {
+    doLast {
+        println("bob - workload defined env param, WORKLOAD_BOBS_BUILD_PARAM=" + System.getenv("WORKLOAD_BOBS_BUILD_PARAM"))
+        println("bob - additional env params BOBS_PROPERTIES_PARAM=" + System.getenv("BOBS_PROPERTIES_PARAM"))
+        println("bob - additional env params BOBS_BUILD_PARAM=" + System.getenv("BOBS_BUILD_PARAM"))
+        println("bob - additional build props BOBS_PROPERTIES_PARAM=" + System.getProperty("BOBS_PROPERTIES_PARAM"))
+        println("bob - additional build props BOBS_BUILD_PARAM=" + System.getProperty("BOBS_BUILD_PARAM"))
+        println("bob - prop from system.getProperty BOBS_PARAM=" + System.getProperty("BOBS_PARAM"))
+        println("bob - prop from gradle.properties BOBS_PARAM=" + project.property("BOBS_PARAM"))
+    }
+}
+
