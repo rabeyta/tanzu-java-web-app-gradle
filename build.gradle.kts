@@ -31,6 +31,7 @@ tasks.withType<Test> {
     useJUnitPlatform()
     doLast {
         println("bob - using System.getenv: " + System.getenv("BOBS_PARAM"))
+        println("bob - using project.property: " + project.property("BOBS_PARAM"))
     }
 }
 
